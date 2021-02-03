@@ -8,5 +8,6 @@ router.get("/",indexpage);
 
 //USE
 router.use('/hr', require('./hr'));
+router.use('/admin', require('./admin'));
 
 module.exports = router;

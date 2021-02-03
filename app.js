@@ -1,14 +1,16 @@
 const express = require("express");
+const path=require("path");
 
 const session = require("express-session");
 const dotenv = require("dotenv");
 const bodyParser = require("body-parser");
 dotenv.config();
 
-const app = express();
+const app = express();//init app
 
 const PORT = process.env.PORT;
 /* Set view engine */
+app.set("views",path.join(__dirname,"views"));
 app.set('view engine', 'ejs');
 
 /* Setup the middlewares & configs */

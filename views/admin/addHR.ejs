@@ -1,0 +1,153 @@
+
+
+    <%- include ('../partials/header.ejs'); -%> 
+    <%- include ('../partials/topbarAdmin.ejs'); -%> 
+    <div class="container-fluid">
+        <div class="row">
+            <%- include ('../partials/sidebarAdmin.ejs'); -%> 
+            <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                  <h1 class="h2"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i> Add HR Manager</h1>
+                  
+                </div>
+        
+                <div class=" justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                  <nav class="breadcrumb" aria-label="breadcrumb">
+                    <ol class="breadcrumb ">
+                    <a class="nav-link" href="#"><li class="breadcrumb-item bread"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp Home &nbsp >></li></a>
+                    <li class="breadcrumb-item bread"><i class="fa fa-users fa-fw" aria-hidden="true"></i>&nbsp HR Manager </li>
+                    <li class="breadcrumb-item bread"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i>&nbsp Add HR Manager</li>
+                    </ol>
+                  </nav>
+                </div>
+
+
+                <div class="card" style="width:100%;">
+                    <div class="card-body">
+                      <h5 class="card-title">Personal Information</h5>
+                          <form class="row g-3 needs-validation" >
+                            <div class="col-md-4">
+                              <label for="firstname" class="form-label">First name</label>
+                              <input type="text" class="form-control" id="firstname" name="firstname" value="Mark" required>
+                              <div class="valid-feedback">
+                                Looks good!
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <label for="lastname" class="form-label">Last name</label>
+                              <input type="text" class="form-control" id="lastname" value="Otto" required>
+                              <div class="valid-feedback">
+                                Looks good!
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <label for="validationCustomUsername" class="form-label">Username</label>
+                              <div class="input-group">
+                                <span class="input-group-text" id="inputGroupPrepend">@</span>
+                                <input type="text" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required>
+                                <div class="invalid-feedback">
+                                  Please choose a username.
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <label for="birthday">Date of Birth</label>
+                              <input type="date" class="form-control" id="birthday" aria-describedby="inputGroupPrepend" required name="birthday">
+                              <div class="invalid-feedback">
+                                Please provide BirthDate.
+                              </div>
+                            </div>
+                            <div class="col-md-8">
+                              <label for="address" class="form-label">Address</label>
+                              <input type="text" class="form-control" id="address" aria-describedby="inputGroupPrepend" required name="address">
+                              <div class="invalid-feedback">
+                                Please provide a valid email.
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <label for="gender" class="form-label">Gender</label>
+                              <select class="form-select" id="gender" required>
+                                <option selected disabled value="">Choose...</option>
+                                <option>Male</option>
+                                <option>Female</option>
+                                <option>Other</option>
+                              </select>
+                              <div class="invalid-feedback">
+                                Please select a valid gender.
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <label for="status" class="form-label">Status</label>
+                              <select class="form-select" id="status" required>
+                                <option selected disabled value="">Choose...</option>
+                                <option>Single</option>
+                                <option>Married</option>
+                               
+                              </select>
+                              <div class="invalid-feedback">
+                                Please select a valid gender.
+                              </div>
+                            </div>
+                            
+                            
+                            
+          
+                            <h5 class="card-title">Emergency Contact Details</h5>
+          
+          
+                            <div class="col-md-4">
+                              <label for="mobile" class="form-label">Mobile</label>
+                              <input type="text" class="form-control" id="mobile" value="" required>
+                              <div class="valid-feedback">
+                                Looks good!
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <label for="landline" class="form-label">LandLine</label>
+                              <input type="text" class="form-control" id="landline" value="" required>
+                              <div class="valid-feedback">
+                                Looks good!
+                              </div>
+                            </div>
+                            
+                            
+                            
+
+                            <h5 class="card-title">Custom Attributes</h5>
+                          <form class="row g-3 needs-validation" >
+                            <% for (let attribute of attributes){%>
+                            <div class="col-md-8">
+                              <label for= "<%=attribute.attributeName%>" class="form-label"><%=attribute.attributeName%></label>
+                              <input type="text" class="form-control" id="<%=attribute.attributeName%>" value="<%=attribute.defaultValue%>" required>
+                              <div class="valid-feedback">
+                                Looks good!
+                              </div>
+                            </div>
+                            <% }%>
+                            
+                            
+                            
+                           
+                          
+                            <div class="col-5"></div>
+                            <div class="col-4">
+                              <button class="btn btn-primary" type="submit">Submit form</button>
+                            </div>
+                          </form>
+                      
+                    </div>
+                  </div>
+        
+                
+        
+                
+              </main>
+
+        </div>
+    </div>
+    <%- include ('../partials/footer.ejs'); -%> 
+
+    
+
+
+
