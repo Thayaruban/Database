@@ -7,7 +7,7 @@
             <%- include ('../partials/sidebarAdmin.ejs'); -%> 
             <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                  <h1 class="h2"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i> Add Custom Attribute</h1>
+                  <h1 class="h2"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i>  <%=title%> </h1>
                   
                 </div>
         
@@ -15,49 +15,59 @@
                   <nav class="breadcrumb" aria-label="breadcrumb">
                     <ol class="breadcrumb ">
                     <a class="nav-link" href="#"><li class="breadcrumb-item bread"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp Home &nbsp >></li></a>
-                    <li class="breadcrumb-item bread"><i class="fa fa-users fa-fw" aria-hidden="true"></i>&nbsp Add Custom Attribute</li>
+                    <li class="breadcrumb-item bread"><i class="fa fa-users fa-fw" aria-hidden="true"></i>&nbsp  Job Details</li>
+                    <li class="breadcrumb-item bread"><i class="fa fa-users fa-fw" aria-hidden="true"></i>&nbsp  <%=tableName%></li>
+                   
+                    <li class="breadcrumb-item bread"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i>&nbsp <%=title%></li>
+                   
                    
                     </ol>
                   </nav>
                 </div>
-          
-                
-                
+
+
                 <div class="card" style="width:auto;">
-                 
-                    <div class="card-body " >
+                    <div class="card-body" >
                       
-                          <form  action="/admin/addCustomAttribute" method="POST" class="row g-3 needs-validation " >
+                        
+                      
+                          <form  action="/admin/<%=tableName%>/edit/<%= independent.id%>" method="POST" class="row g-3 needs-validation " >
                             <div class="row justify-content-center ">
                               <div class="col-md-4">
-                                <label for="attributeName" class="form-label">Attribute Name</label>
-                                <input type="text" class="form-control" id="attributeName" name="attributeName"  required>
+                                <label for="title" class="form-label">Title</label>
+                                <input type="text" class="form-control" id="title" name="title"value="<%=independent.title%>"required>
                                 <div class="valid-feedback">
                                   Looks good!
                                 </div>
                               </div>
                             </div>
                            
-                            <div class="row justify-content-center">
-                              <div class="col-md-4  ">
-                                <label for="defaultValue" class="form-label">Default Value</label>
-                                <input type="text" class="form-control" id="defaultValue" name="defaultValue"  required>
-                                <div class="valid-feedback">
-                                  Looks good!
-                                </div>
-                              </div>
-                              
-                            </div>
-                           <div class="col-5"></div>
+                           
+                           
+                            
+                            
+                            
+                            
+          
+                           
+                            
+                            
+                            
+
+                            
+                            
+                            
+                           
+                          
+                            <div class="col-5"></div>
                             <div class="col-4">
                               <button class="btn btn-primary" type="submit">Submit form</button>
                             </div>
                           </form>
                       
                     </div>
-                   
                   </div>
-                 
+        
                 
         
                 
