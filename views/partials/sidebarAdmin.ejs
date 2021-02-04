@@ -38,11 +38,15 @@
             <li><a class="dropdown-item dmi" href=""><i class="fa fa-user-secret fa-fw" aria-hidden="true"></i> &nbsp View HR Managers</a></li>
       </ul>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle <%= activeCustomAttribute %> " href="#"  id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <span data-feather="file-text"></span>
-        <i class="fa fa-server fa-fw" aria-hidden="true"></i> &nbsp Add Custom Attribute
+        <i class="fa fa-users fa-fw" aria-hidden="true"></i> &nbsp Custom Attributes &nbsp 
       </a>
+      <ul class="dropdown-menu dropdown-menu-right " aria-labelledby="dropdownMenuLink" >
+            <li><a class="dropdown-item dmi" href="addCustomAttribute"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i> &nbsp Add Custom Attribute</a></li>
+            <li><a class="dropdown-item dmi" href="viewCustomAttribute"><i class="fa fa-user-secret fa-fw" aria-hidden="true"></i> &nbsp View Custom Attributes</a></li>
+      </ul>
     </li>
     
    

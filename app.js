@@ -4,6 +4,7 @@ const path=require("path");
 const session = require("express-session");
 const dotenv = require("dotenv");
 const bodyParser = require("body-parser");
+const methodOverride = require('method-override');
 dotenv.config();
 
 const app = express();//init app
@@ -15,6 +16,7 @@ app.set('view engine', 'ejs');
 
 /* Setup the middlewares & configs */
 app.use(bodyParser.urlencoded({ extended: true })); 
+app.use(methodOverride('_method'));
 app.use(bodyParser.json());
 
 app.use(session({

@@ -7,7 +7,7 @@
             <%- include ('../partials/sidebarAdmin.ejs'); -%> 
             <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                  <h1 class="h2"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i> Add Custom Attribute</h1>
+                  <h1 class="h2"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i> Edit Custom Attribute</h1>
                   
                 </div>
         
@@ -15,7 +15,9 @@
                   <nav class="breadcrumb" aria-label="breadcrumb">
                     <ol class="breadcrumb ">
                     <a class="nav-link" href="#"><li class="breadcrumb-item bread"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp Home &nbsp >></li></a>
-                    <li class="breadcrumb-item bread"><i class="fa fa-users fa-fw" aria-hidden="true"></i>&nbsp Add Custom Attribute</li>
+                    <li class="breadcrumb-item bread"><i class="fa fa-users fa-fw" aria-hidden="true"></i>&nbsp  Custom Attributes</li>
+                   
+                    <li class="breadcrumb-item bread"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i>&nbsp Edit Custom Attribute</li>
                    
                     </ol>
                   </nav>
@@ -25,11 +27,11 @@
                 <div class="card" style="width:auto;">
                     <div class="card-body" >
                       
-                          <form  action="/admin/addCustomAttribute" method="POST" class="row g-3 needs-validation " >
+                          <form  action="/admin/viewCustomAttribute/edit/<%=attribute.idcustomAttributes%>" method="POST" class="row g-3 needs-validation " >
                             <div class="row justify-content-center ">
                               <div class="col-md-4">
                                 <label for="attributeName" class="form-label">Attribute Name</label>
-                                <input type="text" class="form-control" id="attributeName" name="attributeName"  required>
+                                <input type="text" class="form-control" id="attributeName" name="attributeName" value="<%=attribute.attributeName%>" required>
                                 <div class="valid-feedback">
                                   Looks good!
                                 </div>
@@ -39,7 +41,7 @@
                             <div class="row justify-content-center">
                               <div class="col-md-4  ">
                                 <label for="defaultValue" class="form-label">Default Value</label>
-                                <input type="text" class="form-control" id="defaultValue" name="defaultValue"  required>
+                                <input type="text" class="form-control" id="defaultValue" name="defaultValue" value = "<%=attribute.defaultValue%>" required>
                                 <div class="valid-feedback">
                                   Looks good!
                                 </div>
