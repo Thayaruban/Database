@@ -27,7 +27,7 @@ app.use(session({
 }));
 
 /* Define the static files and routes */
-app.use(express.static('./public'));
+app.use(express.static(path.join(__dirname, './public')));
 app.use(require('./routes'));
 
 app.listen(PORT,()=>{

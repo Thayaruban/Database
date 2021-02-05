@@ -9,7 +9,7 @@
   <ul class="nav flex-column">
     <li class="nav-item">
       
-      <a class="nav-link <%= activeAdmin %>"  aria-current="page" href="dashboard">
+      <a class="nav-link <%= activeAdmin %>"  aria-current="page" href="/admin/dashboard">
         <span data-feather="home"></span>
         <i class="fa fa-home" aria-hidden="true"></i> &nbsp Home
       </a>
@@ -34,8 +34,8 @@
         <i class="fa fa-users fa-fw" aria-hidden="true"></i> &nbsp HR Manager &nbsp 
       </a>
       <ul class="dropdown-menu dropdown-menu-right " aria-labelledby="dropdownMenuLink" >
-            <li><a class="dropdown-item dmi" href="addHR"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i> &nbsp Add HR Manager</a></li>
-            <li><a class="dropdown-item dmi" href=""><i class="fa fa-user-secret fa-fw" aria-hidden="true"></i> &nbsp View HR Managers</a></li>
+            <li><a class="dropdown-item dmi" href="/admin/addHR"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i> &nbsp Add HR Manager</a></li>
+            <li><a class="dropdown-item dmi" href="/admin/"><i class="fa fa-user-secret fa-fw" aria-hidden="true"></i> &nbsp View HR Managers</a></li>
       </ul>
     </li>
     <li class="nav-item dropdown">
@@ -44,8 +44,8 @@
         <i class="fa fa-address-card fa-fw" aria-hidden="true"></i> &nbsp Custom Attributes &nbsp 
       </a>
       <ul class="dropdown-menu dropdown-menu-right " aria-labelledby="dropdownMenuLink" >
-            <li><a class="dropdown-item dmi" href="addCustomAttribute"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i> &nbsp Add Custom Attribute</a></li>
-            <li><a class="dropdown-item dmi" href="viewCustomAttribute"><i class="fa fa-address-card fa-fw" aria-hidden="true"></i> &nbsp View Custom Attributes</a></li>
+            <li><a class="dropdown-item dmi" href="/admin/addCustomAttribute"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i> &nbsp Add Custom Attribute</a></li>
+            <li><a class="dropdown-item dmi" href="/admin/viewCustomAttribute"><i class="fa fa-address-card fa-fw" aria-hidden="true"></i> &nbsp View Custom Attributes</a></li>
       </ul>
     </li>
     <li class="nav-item dropdown">
@@ -54,9 +54,9 @@
         <i class="fa fa-address-card fa-fw" aria-hidden="true"></i> &nbsp Job Details &nbsp 
       </a>
       <ul class="dropdown-menu dropdown-menu-right <%=activeStatus%> " aria-labelledby="dropdownMenuLink" >
-            <li><a class="dropdown-item dmi" href="employmentStatus"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i> &nbsp EmploymentStatus</a></li>
-            <li><a class="dropdown-item dmi" href="jobTitle"><i class="fa fa-address-card fa-fw" aria-hidden="true"></i> &nbsp Job Title</a></li>
-            <li><a class="dropdown-item dmi" href="payGrade"><i class="fa fa-address-card fa-fw" aria-hidden="true"></i> &nbsp PayGrade</a></li>
+            <li><a class="dropdown-item dmi" href="/admin/employmentStatus"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i> &nbsp EmploymentStatus</a></li>
+            <li><a class="dropdown-item dmi" href="/admin/jobTitle"><i class="fa fa-address-card fa-fw" aria-hidden="true"></i> &nbsp Job Title</a></li>
+            <li><a class="dropdown-item dmi" href="/admin/payGrade"><i class="fa fa-address-card fa-fw" aria-hidden="true"></i> &nbsp PayGrade</a></li>
       </ul>
     </li>
     
