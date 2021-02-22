@@ -9,7 +9,7 @@
             
             <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2"><i class="fa fa-users fa-fw" aria-hidden="true"></i> Manage Custom Attributes</h1>
+                    <h1 class="h2"><i class="fa fa-users fa-fw" aria-hidden="true"></i>  View HR Managers</h1>
                  
                 </div>
         
@@ -17,43 +17,49 @@
                     <nav class="breadcrumb" aria-label="breadcrumb">
                       <ol class="breadcrumb ">
                       <a class="nav-link" href="#"><li class="breadcrumb-item bread"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp Home &nbsp >></li></a>
-                      <li class="breadcrumb-item bread"><i class="fa fa-users fa-fw" aria-hidden="true"></i>&nbsp Custom Attributes </li>
-                      <li class="breadcrumb-item bread"><i class="fa fa-user-secret fa-fw" aria-hidden="true"></i>&nbsp View Custom Attributes</li>
+                      <li class="breadcrumb-item bread"><i class="fa fa-users fa-fw" aria-hidden="true"></i>&nbsp HR Manager </li>
+                      <li class="breadcrumb-item bread"><i class="fa fa-user-secret fa-fw" aria-hidden="true"></i>&nbsp View HR Manager</li>
                       </ol>
                     </nav>
                   </div>
                   <div class="col-lg-12 table-responsive">
                   <table class="table caption-top table-hover ">
-                      <caption>List of Custom Attributes</caption]>
+                      <caption>List of HR Managers</caption]>
                       <br>
                       <caption><span>Search</span>&nbsp <input type="search" class="search_table" name="search_table" placeholder="Search"></caption]>
                       <thead class="table-primary">
           
-                        <td>AttributeName</td>
-                        <td>DefaultValue</td>
-                        <td>AttributeType</td>
+                        <td>Full Name</td>
+                        <td>Email</td>
                         
-                        <td></td>
+                        <td>Branch</td>
+                        <td>Employment Status</td>
+                        <td>Employment Status Category</td>
+                        <td>Pay Grade</td>
+                          <td></td>
                         <td></td>
                         
           
                       <thead>
           
                       <tbody>
-                        <% for (let attribute of attributes){%>
-                        <tr>
-                          <td><%= attribute.field_name %></td>
-                          <td><%= attribute.default_value%></td>
-                          <td><%= attribute.field_type%></td>
-                          <td><a href="/admin/viewCustomAttribute/edit/<%=attribute.field_id%>"> <i class="fa fa-edit fa-fw" aria-hidden="true"></i></a></td</td>
-                          <td>
-                            <form action='/admin/viewCustomAttribute/delete/<%=attribute.field_id%>' method="POST">
-                                <button class="fa fa-trash fa-fw"></button>
-                            </form>
-                              </td</td>
-                         
-                        </tr>
-                        <%} %>
+                        <% for (let v of views){%>
+                          <tr>
+                            <td><%=v.full_name%></td>
+                            <td><%=v.email%></td>
+                            <td><%=v.branch_title%></td>
+                            <td><%=v.employment_status%></td>
+                            <td><%=v.category%></td>
+                            <td><%=v.paygrade_title%></td>
+                            <td><a href="/admin/editHR/<%=v.employee_id%>" <i class="fa fa-edit fa-fw" aria-hidden="true"></i></a></td</td>
+                            <td>
+                              <form action='/admin/deleteHR/<%=v.employee_id%>' method="POST">
+                                  <button class="fa fa-trash fa-fw"></button>
+                              </form>
+                                </td</td>
+                               
+                          </tr>
+                          <%} %> 
                       </tbody>
           
                      

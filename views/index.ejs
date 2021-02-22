@@ -91,15 +91,15 @@ header('location:dashboard.php');
             <img src="assets/img/login.svg" class="w-100">
         </div>
         <div class="col p-0 bg-custom d-flex justify-content-center align-items-center flex-column w-100">
-            <form class="w-75" action="#" action="" method="POST">
+            <form class="w-75"  action="/login" method="POST">
                 <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Username</label>
-                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="username"
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username"name="username" placeholder="username"
                         required>
                 </div>
                 <div class="mb-3">
-                    <label for="exampleFormControlInput2" class="form-label">Password</label>
-                    <input type="text" class="form-control" id="exampleFormControlInput2" placeholder="password"
+                    <label for="password" class="form-label">Password</label>
+                    <input type="text" class="form-control" id="password" name="password" placeholder="password"
                         required>
                 </div>
                 <div class="row">
@@ -112,7 +112,7 @@ header('location:dashboard.php');
                         </div>
                     </div>
                 </div>
-                <button type="button" name="login" class="btn btn-success btn-lg btn-block mt-3">Login Now</button>
+                <button type="submit" name="login" class="btn btn-success btn-lg btn-block mt-3">Login Now</button>
             </form>
         </div>
     </div>

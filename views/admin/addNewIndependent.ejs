@@ -39,8 +39,87 @@
                                   Looks good!
                                 </div>
                               </div>
+                              </div>
+                          
+
+                            <% if(id=="branch"){%>
+
+                            <div class=" row">
+                              <div class="col-md-4"></div>
+                              <div class="col-md-8">
+                                <label for="address" class="form-label">Address</label>
+                                <input type="text" class="form-control" id="address" name="address"  required>
+                                <div class="valid-feedback">
+                                  Looks good!
+                                </div>
+                              </div>
                             </div>
+                            <% } else if(id=="department"){%>
+                              
+                                
+                                <div class="col-md-4">
+                                  <label for="building" class="form-label">Building</label>
+                                  <input type="text" class="form-control" id="building" name="building"  required>
+                                  <div class="valid-feedback">
+                                    Looks good!
+                                  </div>
+                                </div>
+                             
+                              <div class="col-md-4">
+                                <label for="description" class="form-label">Description</label>
+                                <input type="text" class="form-control" id="description" name="description"  required>
+                                <div class="valid-feedback">
+                                  Looks good!
+                                </div>
+                              </div>
                            
+
+                            <div class="col-md-4">
+                              <label for="supervisor" class="form-label">Supervisor</label>
+                              <select class="form-select" id="supervisor" name="supervisor" >
+                                <option selected disabled value="">Choose...</option>
+                                <% for(let p of supervisor){%>
+                                <option value="<%=p.employee_id%>"><%= p.first_name,p.last_name %></option>
+                             
+                                <%}%>
+                                </select>
+                              <div class="valid-feedback">
+                                Looks good!
+                              </div>
+                            </div>
+                         
+                              <%} else  if (id=="employment_status"){%>
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4">
+                                  <label for="category" class="form-label">Category</label>
+                                  <select class="form-select" id="category" name="category" required>
+                                    <option selected disabled value="">Choose...</option>
+                                    
+                                    <option value="fulltime"> Fulltime %></option>
+                                    <option value="parttime">Parttime %></option>
+                                    <option value=null> Null</option>
+                                   </select>
+                                  
+                                  <div class="valid-feedback">
+                                    Looks good!
+                                  </div>
+                                </div>
+                              
+                               
+                              <%} else if (id=="paygrade"){%>
+                                <div class="col-md-4"></div>
+                                <div class="col-md-4">
+                                  <label for="salary" class="form-label">Basic Salary</label>
+                                  <input type="text" class="form-control" id="salary" name="salary"  required>
+                                  <div class="valid-feedback">
+                                    Looks good!
+                                  </div>
+                                </div>
+                              
+                           
+                              <%}%>
+
+                            
                            
                            
                             
@@ -57,8 +136,9 @@
                             
                             
                            
-                          
+                             
                             <div class="col-5"></div>
+                           
                             <div class="col-4">
                               <button class="btn btn-primary" type="submit">Submit form</button>
                             </div>

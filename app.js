@@ -5,6 +5,8 @@ const session = require("express-session");
 const dotenv = require("dotenv");
 const bodyParser = require("body-parser");
 const methodOverride = require('method-override');
+const passport=require("passport");
+const LocalStrategy = require('passport-local');
 dotenv.config();
 
 const app = express();//init app
@@ -20,10 +22,16 @@ app.use(methodOverride('_method'));
 app.use(bodyParser.json());
 
 app.use(session({
+    name:"session",
     secret: process.env.SECRET,
     resave: true,
     saveUninitialized: true,
-    cookie: { maxAge: 10 * 24 * 60 * 60 * 1000 },//10 days
+    cookie: {
+        httpOnly: true,
+        // secure: true,
+        expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+        maxAge: 1000 * 60 * 60 * 24 * 7
+    }
 }));
 
 /* Define the static files and routes */

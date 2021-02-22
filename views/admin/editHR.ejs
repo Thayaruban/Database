@@ -7,7 +7,7 @@
             <%- include ('../partials/sidebarAdmin.ejs'); -%> 
             <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                  <h1 class="h2"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i> Add HR Manager</h1>
+                  <h1 class="h2"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i> Edit HR Manager</h1>
                   
                 </div>
         
@@ -16,7 +16,7 @@
                     <ol class="breadcrumb ">
                     <a class="nav-link" href="#"><li class="breadcrumb-item bread"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp Home &nbsp >></li></a>
                     <li class="breadcrumb-item bread"><i class="fa fa-users fa-fw" aria-hidden="true"></i>&nbsp HR Manager </li>
-                    <li class="breadcrumb-item bread"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i>&nbsp Add HR Manager</li>
+                    <li class="breadcrumb-item bread"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i>&nbsp Edit HR Manager</li>
                     </ol>
                   </nav>
                 </div>
@@ -25,17 +25,17 @@
                 <div class="card" style="width:100%;">
                     <div class="card-body">
                       <h5 class="card-title">Personal Information</h5>
-                          <form action="/admin/addHR" class="row g-3 needs-validation" method="post" >
+                          <form action="/admin/editHR/<%=HR.employee_id%>" class="row g-3 needs-validation" method="post" >
                             <div class="col-md-4">
                               <label for="firstname" class="form-label">First name</label>
-                              <input type="text" class="form-control" id="first_name" name="first_name" value="Mark" required>
+                              <input type="text" class="form-control" id="first_name" name="first_name" value="<%=HR.first_name%>" required>
                               <div class="valid-feedback">
                                 Looks good!
                               </div>
                             </div>
                             <div class="col-md-4">
                               <label for="last_name" class="form-label">Last name</label>
-                              <input type="text" class="form-control" id="last_name" name="last_name" value="Otto" required>
+                              <input type="text" class="form-control" id="last_name" name="last_name" value="<%=HR.last_name%>" required>
                               <div class="valid-feedback">
                                 Looks good!
                               </div>
@@ -43,14 +43,14 @@
                             
                             <div class="col-md-4">
                               <label for="dob">Date of Birth</label>
-                              <input type="date" class="form-control" id="dob" name="dob" aria-describedby="inputGroupPrepend" required name="birthday">
+                              <input type="date" class="form-control" id="dob" name="dob" aria-describedby="inputGroupPrepend" required name="birthday" value="<%=HR.dob%>">
                               <div class="invalid-feedback">
                                 Please provide BirthDate.
                               </div>
                             </div>
                             <div class="col-md-8">
                               <label for="address" class="form-label">Address</label>
-                              <input type="text" class="form-control" id="address" name="address" aria-describedby="inputGroupPrepend" required name="address">
+                              <input type="text" class="form-control" id="address" name="address" aria-describedby="inputGroupPrepend" required name="address" value="<%=HR.address%>">
                               <div class="invalid-feedback">
                                 Please provide a valid address.
                               </div>
@@ -58,7 +58,7 @@
 
                             <div class="col-md-4">
                               <label for="address" class="form-label">Email</label>
-                              <input type="text" class="form-control" id="email" name="email" aria-describedby="inputGroupPrepend" required >
+                              <input type="text" class="form-control" id="email" name="email" aria-describedby="inputGroupPrepend" required value="<%=HR.email%>" >
                               <div class="invalid-feedback">
                                 Please provide a valid email.
                               </div>
@@ -66,10 +66,14 @@
                             <div class="col-md-4">
                               <label for="gender" class="form-label">Gender</label>
                               <select class="form-select" id="gender" name="gender" required>
-                                <option selected disabled value="">Choose...</option>
-                                <option>Male</option>
-                                <option>Female</option>
-                                <option>Other</option>
+                                <option  value="<%=HR.gender%>"><%=HR.gender%></option>
+                                <%= arr=["Male","Female","Other"]%>
+                                <% for(let a of arr){%>
+                                  <% if(a!=HR.gender){%>
+                                  <option value="<%=a%>"> <%=a%></option>
+                                  <%}%>
+                               <%}%>
+                               
                               </select>
                               <div class="invalid-feedback">
                                 Please select a valid gender.
@@ -78,9 +82,15 @@
                             <div class="col-md-4">
                               <label for="marital_status" class="form-label">Status</label>
                               <select class="form-select" id="marital_status" name="marital_status" required>
-                                <option selected disabled value="">Choose...</option>
-                                <option>Single</option>
-                                <option>Married</option>
+                                <option  value="<%=HR.marital_status%>"><%=HR.marital_status%></option>
+                                <%= arr=["Single","Married"]%>
+                                <% for(let a of arr){%>
+                                  <% if(a!=HR.marital_status){%>
+                                  <option value="<%=a%>"> <%=a%></option>
+                                  <%}%>
+                               <%}%>
+
+        
                                
                               </select>
                               <div class="invalid-feedback">
@@ -89,21 +99,21 @@
                             </div>
                             <div class="col-md-4">
                               <label for="residency" class="form-label">Residency</label>
-                              <input type="text" class="form-control" id="residency" name="residency" aria-describedby="inputGroupPrepend" required >
+                              <input type="text" class="form-control" id="residency" name="residency" aria-describedby="inputGroupPrepend" required value="<%=HR.residency%>">
                               <div class="invalid-feedback">
                                 Please give valid residency.
                               </div>
                             </div>
                             <div class="col-md-4">
                               <label for="mobile" class="form-label">Mobile</label>
-                              <input type="text" class="form-control" id="mobile" value="" name="mobile" required>
+                              <input type="text" class="form-control" id="mobile"  name="mobile" required value="<%=HR.cell_phone%>"> 
                               <div class="valid-feedback">
                                 Looks good!
                               </div>
                             </div>
                             <div class="col-md-4">
                               <label for="landline" class="form-label">LandLine</label>
-                              <input type="text" class="form-control" id="landline" name="landline"value="" required>
+                              <input type="text" class="form-control" id="landline" name="landline" value="<%=HR.home_phone%>" required>
                               <div class="valid-feedback">
                                 Looks good!
                               </div>
@@ -119,28 +129,28 @@
           
                             <div class="col-md-4">
                               <label for="emergency_firstname" class="form-label">First name</label>
-                              <input type="text" class="form-control" id="emergency_first_name" name="emergency_first_name" placeholder="Emergency Firstname"  required>
+                              <input type="text" class="form-control" id="emergency_first_name" name="emergency_first_name" placeholder="Emergency Firstname" value="<%=HR.emergency_first_name%>" required>
                               <div class="valid-feedback">
                                 Looks good!
                               </div>
                             </div>
                             <div class="col-md-4">
                               <label for="emergency_last_name" class="form-label">Last name</label>
-                              <input type="text" class="form-control" id="emergency_last_name" name="emergency_last_name" placeholder="Emergency Lastname" required>
+                              <input type="text" class="form-control" id="emergency_last_name" name="emergency_last_name" placeholder="Emergency Lastname" value="<%=HR.emergency_last_name%>" required>
                               <div class="valid-feedback">
                                 Looks good!
                               </div>
                             </div>
                             <div class="col-md-8">
                               <label for="emergency_address" class="form-label">Address</label>
-                              <input type="text" class="form-control" id="emergency_address" name="emergency_address" aria-describedby="inputGroupPrepend" required name="address">
+                              <input type="text" class="form-control" id="emergency_address" name="emergency_address" aria-describedby="inputGroupPrepend" required value="<%=HR.emergency_address%>" name="address">
                               <div class="invalid-feedback">
                                 Please provide a valid address.
                               </div>
                             </div>
                             <div class="col-md-4">
                               <label for="emergency_mobile" class="form-label">Mobile</label>
-                              <input type="text" class="form-control" id="emergency_mobile" value="" name="emergency_mobile" required>
+                              <input type="text" class="form-control" id="emergency_mobile"  name="emergency_mobile" value="<%=HR.emergency_cell_phone%>" required>
                               <div class="valid-feedback">
                                 Looks good!
                               </div>
@@ -148,14 +158,14 @@
                           
                             <div class="col-md-4">
                               <label for="emergency_landline" class="form-label">LandLine</label>
-                              <input type="text" class="form-control" id="emergency_landline" name="emergency_landline"value="" required>
+                              <input type="text" class="form-control" id="emergency_landline" name="emergency_landline"value="<%=HR.emergency_home_phone%>" required>
                               <div class="valid-feedback">
                                 Looks good!
                               </div>
                             </div>
                             <div class="col-md-4">
                               <label for="relationship" class="form-label">Relationship</label>
-                              <input type="text" class="form-control" id="relationship" name="relationship"value="" required>
+                              <input type="text" class="form-control" id="relationship" name="relationship" value="<%=HR.relationship%>" required>
                               <div class="valid-feedback">
                                 Looks good!
                               </div>
@@ -167,10 +177,11 @@
                             <div class="col-md-4">
                               <label for="branch" class="form-label">Branch</label>
                               <select class="form-select" id="branch" name="branch" required>
-                                <option selected disabled value="" >Choose...</option>
+                                <option  value="<%=HR.branch_id%>" ><%=HR.branch_title%></option>
                                 <% for(let b of branches){%>
+                                  <%if(b.branch_title!=HR.branch_title){%>
                                 <option value="<%=b.branch_id%>" ><%= b.branch_title %></option>
-                             
+                               <%}%>
                                 <%}%>
                               </select>
                               <div class="invalid-feedback">
@@ -182,10 +193,12 @@
                             <div class="col-md-4">
                               <label for="employment_status" class="form-label">EmploymentStatus</label>
                               <select class="form-select" id="employment_status" name="employment_status" required>
-                                <option selected disabled value="">Choose...</option>
-                                <% for(let e of employmentStatusesU){%>
-                                <option value="<%=e.employment_status%>"><%= e.employment_status %></option>
+                                <option  value="<%=HR.employment_status%>"><%=HR.employment_status%></option>
+                                <% for(let e of employmentStatuses){%>
+                                  <%if(e.employment_status!=HR.employment_status){%>
+                                <option value="<%=e.employment_status_title%>"><%= e.employment_status_title %></option>
                              
+                                <%}%>
                                 <%}%>
                               </select>
                               <div class="invalid-feedback">
@@ -196,12 +209,14 @@
                             <div class="col-md-4">
                               <label for="employment_status_category" class="form-label">EmploymentStatus Category</label>
                               <select class="form-select" id="employment_status_category" name="employment_status_category" required>
-                                <option selected disabled value="">Choose...</option>
+                                <option  value="<%=HR.category%>"><%=HR.category%></option>
+                                <%= arr=["fulltime","parttime","null"]%>
+                                <% for(let a of arr){%>
+                                  <% if(a!=HR.category){%>
+                                <option value="<%=a%>"><%=a%></option>
                                
-                                <option value="fulltime">Full Time</option>
-                                <option value="parttime">Part Time</option>
-                                <option value="null">Null</option>
-                             
+                             <%}%>
+                             <%}%>
                                 
                               </select>
                               <div class="invalid-feedback">
@@ -213,10 +228,14 @@
                             <div class="col-md-4">
                               <label for="paygrade" class="form-label">PayGrade</label>
                               <select class="form-select" id="paygrade" name="paygrade" required>
-                                <option selected disabled value="">Choose...</option>
+                                <option  value="<%=HR.paygrade_id%>"><%=HR.paygrade_title%></option>
+                                
+                                 
                                 <% for(let p of payGrades){%>
+                                  <%if(p.paygrade_title!=HR.paygrade_title){%>
                                 <option value="<%=p.paygrade_id%>"><%= p.paygrade_title %></option>
                              
+                                <%}%>
                                 <%}%>
                               </select>
                               <div class="invalid-feedback">
@@ -226,7 +245,7 @@
                             </div>
                             <div class="col-md-4">
                               <label for="accno" class="form-label">Account No</label>
-                              <input type="text" class="form-control" id="accno" name="accno" placeholder="Account No"value="" required>
+                              <input type="text" class="form-control" id="accno" name="accno" placeholder="Account No"value="<%=HR.bank_account_number%>" required>
                               <div class="valid-feedback">
                                 Looks good!
                               </div>
@@ -241,8 +260,8 @@
                         
                             <% for (let attribute of attributes){%>
                             <div class="col-md-4">
-                              <label for= "<%=attribute.field_id%>" class="form-label"><%=attribute.field_name%></label>
-                              <input type="text" class="form-control" id="<%=attribute.field_id%>" name="custom[<%=attribute.field_name%>]" value="<%=attribute.default_value%>" required>
+                              <label for= "<%=attribute.field_name%>" class="form-label"><%=attribute.field_name%></label>
+                              <input type="text" class="form-control" id="<%=attribute.field_name%>" name="custom[<%=attribute.field_name%>]" value="<%=attribute.default_value%>" required>
                               <div class="valid-feedback">
                                 Looks good!
                               </div>

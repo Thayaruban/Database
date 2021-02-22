@@ -9,7 +9,7 @@
             
             <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2"><i class="fa fa-users fa-fw" aria-hidden="true"></i> Manage <%=title%></h1>
+                    <h1 class="h2"><i class="fa fa-users fa-fw" aria-hidden="true"></i> Manage <%=id%></h1>
                  
                 </div>
         
@@ -18,46 +18,220 @@
                       <ol class="breadcrumb ">
                       <a class="nav-link" href="#"><li class="breadcrumb-item bread"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp Home &nbsp >></li></a>
                       <li class="breadcrumb-item bread"><i class="fa fa-users fa-fw" aria-hidden="true"></i>&nbsp Job Details </li>
-                      <li class="breadcrumb-item bread"><i class="fa fa-users fa-fw" aria-hidden="true"></i>&nbsp <%=title%> </li>
+                      <li class="breadcrumb-item bread"><i class="fa fa-users fa-fw" aria-hidden="true"></i>&nbsp <%=id%> </li>
                     
                       </ol>
                     </nav>
                   </div>
                   <div class="col-lg-12 table-responsive">
                   <table class="table caption-top table-hover ">
-                      <caption>List of available <%=title%> </caption]>
+                      <caption>List of available <%=id%> </caption]>
                       <br>
                       <caption><span>Search</span>&nbsp <input type="search" class="search_table" name="search_table" placeholder="Search"></caption]>
                       <thead class="table-primary">
-          
-                        <td><%= title%> Name</td>
+                        <% if (id=="job"){%>
+                        <td><%= id%> Name</td>
                         <td></td>
                         <td></td>
                         
           
-                      <thead>
+                        </thead>
           
                       <tbody>
-                        <% for (let value of datas){%>
+                       
+                        
+                         <% for (let value of datas){%>
                         <tr>
-                          <td><%= value.title %></td>
+                         
+                         
+                          <td><%=value.job_title%></td>
                           
-                          <td><a href="/admin/<%=id%>/edit/<%= value.id%>"> <i class="fa fa-edit " aria-hidden="true"></i></a></td</td>
+
+                         
+                          
+                          
+
+                         
+                            <td><a href="/admin/<%=id%>/edit/<%= value.job_id%>"> <i class="fa fa-edit " aria-hidden="true"></i></a></td</td>
                           <td>
-                            <form action='/admin/<%=id%>/delete/<%= value.id%>' method="POST">
+                            <form action="/admin/<%=id%>/delete/<%= value.job_id%>" method="POST">
+                              <button class="fa fa-trash"></button>
+                          </form>
+                            </td</td>
+                       
+                           
+                           
+                        </tr>
+                        <%} %>
+                        <%} else if (id=="employment_status"){ %>
+
+                        <td><%= id%> Name</td>
+                        <td>Category</td>
+                        <td></td>
+                        <td></td>
+                        
+          
+                      </thead>
+          
+                      <tbody>
+                       
+                        
+                         <% for (let value of datas){%>
+                        <tr>
+                         
+                         
+                          <td><%=value.employment_status%></td>
+                          
+                          <td><%=value.category%></td>
+                          
+                          
+                          
+
+                         
+                            <td><a href="/admin/<%=id%>/edit/<%= value.employment_status_id%>"> <i class="fa fa-edit " aria-hidden="true"></i></a></td</td>
+                          <td>
+                            <form action="/admin/<%=id%>/delete/<%= value.employment_status_id%>" method="POST">
+                              <button class="fa fa-trash"></button>
+                          </form>
+                            </td</td>
+                       
+                            
+                           
+                        </tr>
+                        <%} %>
+                      
+                        <%} else if (id=="paygrade"){ %>
+
+                          <td><%= id%> Name</td>
+                          <td>Basic Salary</td>
+                          <td></td>
+                          <td></td>
+                          
+            
+                        </thead>
+            
+                        <tbody>
+                         
+                          
+                           <% for (let value of datas){%>
+                          <tr>
+                           
+                           
+                            <td><%=value.paygrade_title%></td>
+                            
+                            <td><%=value.basic_salary%></td>
+                            
+                            
+                            
+                            
+  
+                           
+                              <td><a href="/admin/<%=id%>/edit/<%= value.paygrade_id%>"> <i class="fa fa-edit " aria-hidden="true"></i></a></td</td>
+                            <td>
+                              <form action="/admin/<%=id%>/delete/<%= value.paygrade_id%>" method="POST">
                                 <button class="fa fa-trash"></button>
                             </form>
                               </td</td>
                          
-                        </tr>
-                        <%} %>
+                              
+                             
+                          </tr>
+                          <%} %>
+                          
+                          <%} else if (id=="branch"){ %>
+                            <p>Branch</p>
+
+                            <td><%= id%> Name</td>
+                            <td>Addres</td>
+                            <td></td>
+                            <td></td>
+                            
+              
+                          </thead>
+              
+                          <tbody>
+                           
+                            
+                             <% for (let value of datas){%>
+                            <tr>
+                             
+                             
+                              <td><%=value.branch_title%></td>
+                              
+                              <td><%=value.address%></td>
+                              
+                              
+                              
+    
+                             
+                                <td><a href="/admin/<%=id%>/edit/<%= value.branch_id%>"> <i class="fa fa-edit " aria-hidden="true"></i></a></td</td>
+                              <td>
+                                <form action="/admin/<%=id%>/delete/<%= value.branch_id%>" method="POST">
+                                  <button class="fa fa-trash"></button>
+                              </form>
+                                </td</td>
+                           
+                                
+                               
+                            </tr>
+                            <%}%>
+                            <%} else if (id=="department"){ %>
+
+                              <td> Department Name</td>
+                              <td>Building</td>
+                              <td>Description</td>
+                              
+                              <td>Supervisor Id</td>
+                              <td></td>
+                              <td></td>
+                              
+                
+                            </thead>
+                
+                            <tbody>
+                             
+                              
+                               <% for (let value of datas){%>
+                              <tr>
+                               
+                               
+                                <td><%=value.department_title%></td>
+                                
+                                <td><%=value.building%></td>
+                                <td><%=value.department_description%></td>
+                                
+                                <td><%=value.first_name%></td>
+
+                                
+                                
+                                
+      
+                               
+                                  <td><a href="/admin/<%=id%>/edit/<%= value.department_id%>"> <i class="fa fa-edit " aria-hidden="true"></i></a></td</td>
+                                <td>
+                                  <form action="/admin/<%=id%>/delete/<%= value.department_id%>" method="POST">
+                                    <button class="fa fa-trash"></button>
+                                </form>
+                                  </td</td>
+                             
+                                  
+                                 
+                              </tr>
+                              <%} %>
+                              <%} %>
+                              
+                          
+                            
+  
+                          
+
                       </tbody>
                   </table>
                   </div>
                   <div class="col-12 col-sm-4"></div>
                   <div class="col-12 col-sm-4 container-fluid">
-                    <a href='/admin/addNew/<%=title%>'>
-                      <span><b>Add New <%= title%></b></span>
+                    <a href='/admin/addNew/<%=id%>'>
+                      <span><b>Add New <%= id%></b></span>
                       <button class="fa fa-plus" aria-hidden="true" > </button>
                     </a>
                   </div>

@@ -31,18 +31,154 @@
                       
                         
                       
-                          <form  action="/admin/<%=tableName%>/edit/<%= independent.id%>" method="POST" class="row g-3 needs-validation " >
-                            <div class="row justify-content-center ">
+                          
+                           
+                            <% if(tableName=="branch"){%>
+                              <form  action="/admin/<%=tableName%>/edit/<%= independent.branch_id%>" method="POST" class="row g-3 needs-validation " >
+                                <div class="row justify-content-center ">
+                                  <div class="col-md-4">
+                                    <label for="title" class="form-label">Title</label>
+                                    <input type="text" class="form-control" id="title" name="title"value="<%=independent.branch_title%>"required>
+                                    <div class="valid-feedback">
+                                      Looks good!
+                                    </div>
+                                  </div>
+                                </div>
+
+                              <div class=" row">
+                                <div class="col-md-4"></div>
+                                <div class="col-md-8">
+                                  <label for="address" class="form-label">Address</label>
+                                  <input type="text" class="form-control" id="address" name="address" value="<%=independent.address%>" required>
+                                  <div class="valid-feedback">
+                                    Looks good!
+                                  </div>
+                                </div>
+                              </div>
+                              <% } else if(tableName=="department"){%>
+                                <form  action="/admin/<%=tableName%>/edit/<%= independent.department_id%>" method="POST" class="row g-3 needs-validation " >
+                                  <div class="row justify-content-center ">
+                                    <div class="col-md-4">
+                                      <label for="title" class="form-label">Title</label>
+                                      <input type="text" class="form-control" id="title" name="title"value="<%=independent.department_title%>"required>
+                                      <div class="valid-feedback">
+                                        Looks good!
+                                      </div>
+                                    </div>
+                                  </div>
+                                  
+                                <div class="col-md-4">
+                                  <label for="building" class="form-label">Building</label>
+                                  <input type="text" class="form-control" id="building" name="building" value="<%=independent.building%>"  required>
+                                  <div class="valid-feedback">
+                                    Looks good!
+                                  </div>
+                                </div>
+                             
                               <div class="col-md-4">
-                                <label for="title" class="form-label">Title</label>
-                                <input type="text" class="form-control" id="title" name="title"value="<%=independent.title%>"required>
+                                <label for="description" class="form-label">Description</label>
+                                <input type="text" class="form-control" id="description" name="description" value="<%=independent.department_description%>" required>
                                 <div class="valid-feedback">
                                   Looks good!
                                 </div>
                               </div>
+                           
+
+                            <div class="col-md-4">
+                              <label for="supervisor" class="form-label">Supervisor</label>
+                              <select class="form-select" id="supervisor" name="supervisor" required >
+                                <option selected disabled value="<%=independent.supervisor_id%>"><%=supervisorName.first_name%></option>
+                                <% for(let p of supervisor){%>
+                                  <%if(p.first_name!=supervisorName.first_name){%>
+                                <option value="<%=p.employee_id%>"><%=p.first_name %></option>
+                                  <%}%>
+                                <%}%>
+                                </select>
+                              <div class="valid-feedback">
+                                Looks good!
+                              </div>
                             </div>
-                           
-                           
+                         
+                                <%} else  if (tableName=="employment_status"){%>
+                                  <form  action="/admin/<%=tableName%>/edit/<%= independent.employment_status_id%>" method="POST" class="row g-3 needs-validation " >
+                                    <div class="row justify-content-center ">
+                                      <div class="col-md-4">
+                                        <label for="title" class="form-label">Title</label>
+                                        <input type="text" class="form-control" id="title" name="title"value="<%=independent.employment_status%>"required>
+                                        <div class="valid-feedback">
+                                          Looks good!
+                                        </div>
+                                      </div>
+                                    </div>
+                                  <div class="col-md-4"></div>
+                                  <div class="col-md-4">
+                                    <label for="category" class="form-label">Category</label>
+                                    <select class="form-select" id="category" name="category" required>
+                                      <option selected disabled value="<%=independent.category%>"><%=independent.category%></option>
+                                      <%= arr=["fulltime","parttime","null"]%>
+                                      <% for(let a of arr){%>
+                                        <% if(a!=independent.category){%>
+                                        <option value="<%=a%>"> <%=a%></option>
+                                        <%}%>
+                                     <%}%>
+                                     </select>
+                                    
+                                    <div class="valid-feedback">
+                                      Looks good!
+                                    </div>
+                                  </div>
+                                
+                                 
+                                <%} else if (tableName=="paygrade"){%>
+                                  <form  action="/admin/<%=tableName%>/edit/<%= independent.paygrade_id%>" method="POST" class="row g-3 needs-validation " >
+                                    <div class="row justify-content-center ">
+                                      <div class="col-md-4">
+                                        <label for="title" class="form-label">Title</label>
+                                        <input type="text" class="form-control" id="title" name="title"value="<%=independent.paygrade_title%>"required>
+                                        <div class="valid-feedback">
+                                          Looks good!
+                                        </div>
+                                      </div>
+                                    </div>
+                                  <div class="col-md-4"></div>
+                                  <div class="col-md-4">
+                                    <label for="salary" class="form-label">Basic Salary</label>
+                                    <input type="text" class="form-control" id="salary" name="salary" value="<%=independent.basic_salary%>"  required>
+                                    <div class="valid-feedback">
+                                      Looks good!
+                                    </div>
+                                  </div>
+                                
+                             
+                                <%} else if(tableName=="job"){%>
+  
+                                <form  action="/admin/<%=tableName%>/edit/<%= independent.job_id%>" method="POST" class="row g-3 needs-validation " >
+                                  <div class="row justify-content-center ">
+                                    <div class="col-md-4">
+                                      <label for="title" class="form-label">Title</label>
+                                      <input type="text" class="form-control" id="title" name="title"value="<%=independent.job_title%>"required>
+                                      <div class="valid-feedback">
+                                        Looks good!
+                                      </div>
+                                    </div>
+                                  </div>
+                               
+                              <%}%>
+                             
+                             
+                              
+                              
+                              
+                              
+            
+                             
+                              
+                              
+                              
+  
+                              
+                              
+                              
                            
                             
                             

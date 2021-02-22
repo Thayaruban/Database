@@ -27,11 +27,11 @@
                 <div class="card" style="width:auto;">
                     <div class="card-body" >
                       
-                          <form  action="/admin/viewCustomAttribute/edit/<%=attribute.idcustomAttributes%>" method="POST" class="row g-3 needs-validation " >
+                          <form  action="/admin/viewCustomAttribute/edit/<%=attribute.field_id%>" method="POST" class="row g-3 needs-validation " >
                             <div class="row justify-content-center ">
                               <div class="col-md-4">
                                 <label for="attributeName" class="form-label">Attribute Name</label>
-                                <input type="text" class="form-control" id="attributeName" name="attributeName" value="<%=attribute.attributeName%>" required>
+                                <input type="text" class="form-control" id="attributeName" name="attribute_name" value="<%=attribute.field_name%>" required>
                                 <div class="valid-feedback">
                                   Looks good!
                                 </div>
@@ -40,12 +40,47 @@
                            
                             <div class="row justify-content-center">
                               <div class="col-md-4  ">
-                                <label for="defaultValue" class="form-label">Default Value</label>
-                                <input type="text" class="form-control" id="defaultValue" name="defaultValue" value = "<%=attribute.defaultValue%>" required>
+                                <label for="default_value" class="form-label">Default Value</label>
+                                <input type="text" class="form-control" id="default_value" name="default_value" value = "<%=attribute.default_value%>" required>
                                 <div class="valid-feedback">
                                   Looks good!
                                 </div>
                               </div>
+                              
+                            </div>
+
+                            <div class="row justify-content-center">
+                              <div class="col-md-4  ">
+                                <label for="field_type" class="form-label">Attribute Type</label>
+                                <input type="text" class="form-control" id="field_type" name="field_type" value = "<%=attribute.field_type%>" required>
+                                <div class="valid-feedback">
+                                  Looks good!
+                                </div>
+                              </div>
+                              
+                              
+                            </div>
+                            <div class="row justify-content-center">
+                              <div class="col-md-4  ">
+                                <label for="min_length" class="form-label">Min Length</label>
+                                <input type="text" class="form-control" id="min_length" name="min_length"value = "<%=attribute.min_length%>"  required>
+                                <div class="valid-feedback">
+                                  Looks good!
+                                </div>
+                              </div>
+                              
+                              
+                            </div>
+
+                            <div class="row justify-content-center">
+                              <div class="col-md-4  ">
+                                <label for="max_length" class="form-label">Max Length</label>
+                                <input type="text" class="form-control" id="max_length" name="max_length" value = "<%=attribute.max_length%>" required>
+                                <div class="valid-feedback">
+                                  Looks good!
+                                </div>
+                              </div>
+                              
                               
                             </div>
                            
