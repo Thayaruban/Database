@@ -1,6 +1,7 @@
 //const session = require("express-session");
 module.exports = {
     indexpage:(req,res)=>{
+        console.log(req.session);
         res.render("index",{
            
         });

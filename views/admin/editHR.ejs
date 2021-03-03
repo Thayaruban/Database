@@ -191,6 +191,54 @@
                             </div>
 
                             <div class="col-md-4">
+                              <label for="job" class="form-label">Job</label>
+                              <select class="form-select" id="job" name="job" required>
+                                <option selected  value="<%=HR.job_id%>" ><%=HR.job_title%></option>
+                                <% for(let j of jobs){%>
+                                  <%if(j.job_title != HR.job_title){%>
+                                <option value="<%=j.job_id%>" ><%= j.job_title %></option>
+                                 <%}%>
+                                <%}%>
+                              </select>
+                              <div class="invalid-feedback">
+                                Please select a job.
+                              </div>
+                             
+                            </div>
+                            <div class="col-md-4">
+                              <label for="department" class="form-label">Department</label>
+                              <select class="form-select" id="department" name="department" required>
+                                <option selected value="<%=HR.department_id%>" ><%=HR.department_title%></option>
+                                <% for(let d of department){%>
+                                  <%if(d.department_title!=HR.department_title){%>
+                                <option value="<%=d.department_id%>" ><%= d.department_title %></option>
+                                <%}%>
+                                <%}%>
+                              </select>
+                              <div class="invalid-feedback">
+                                Please select a department.
+                              </div>
+                             
+                            </div>
+
+                            <div class="col-md-4">
+                              <label for="role" class="form-label">Role</label>
+                              <select class="form-select" id="role" name="role" required>
+                                <option selected  value="<%=HR.role_id%>" ><%=HR.role_title%></option>
+                                <% for(let r of role){%>
+                                  <%if(r.role_title!=HR.role_title){%>
+                                <option value="<%=r.role_id%>" ><%= r.role_title %></option>
+                             
+                                <%}%>
+                                <%}%>
+                              </select>
+                              <div class="invalid-feedback">
+                                Please select a role.
+                              </div>
+                             
+                            </div>
+
+                            <div class="col-md-4">
                               <label for="employment_status" class="form-label">EmploymentStatus</label>
                               <select class="form-select" id="employment_status" name="employment_status" required>
                                 <option  value="<%=HR.employment_status%>"><%=HR.employment_status%></option>

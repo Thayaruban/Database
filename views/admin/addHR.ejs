@@ -164,6 +164,7 @@
 
                             <h5 class="card-title">Job Details</h5>
           
+                           
                             <div class="col-md-4">
                               <label for="branch" class="form-label">Branch</label>
                               <select class="form-select" id="branch" name="branch" required>
@@ -175,6 +176,50 @@
                               </select>
                               <div class="invalid-feedback">
                                 Please select a branch.
+                              </div>
+                             
+                            </div>
+
+                            <div class="col-md-4">
+                              <label for="job" class="form-label">Job</label>
+                              <select class="form-select" id="job" name="job" required>
+                                <option selected disabled value="" >Choose...</option>
+                                <% for(let j of jobs){%>
+                                <option value="<%=j.job_id%>" ><%= j.job_title %></option>
+                             
+                                <%}%>
+                              </select>
+                              <div class="invalid-feedback">
+                                Please select a job.
+                              </div>
+                             
+                            </div>
+                            <div class="col-md-4">
+                              <label for="department" class="form-label">Department</label>
+                              <select class="form-select" id="department" name="department" required>
+                                <option selected disabled value="" >Choose...</option>
+                                <% for(let d of department){%>
+                                <option value="<%=d.department_id%>" ><%= d.department_title %></option>
+                             
+                                <%}%>
+                              </select>
+                              <div class="invalid-feedback">
+                                Please select a department.
+                              </div>
+                             
+                            </div>
+
+                            <div class="col-md-4">
+                              <label for="role" class="form-label">Role</label>
+                              <select class="form-select" id="role" name="role" required>
+                                <option selected disabled value="" >Choose...</option>
+                                <% for(let r of role){%>
+                                <option value="<%=r.role_id%>" ><%= r.role_title %></option>
+                             
+                                <%}%>
+                              </select>
+                              <div class="invalid-feedback">
+                                Please select a role.
                               </div>
                              
                             </div>

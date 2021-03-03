@@ -2,11 +2,20 @@ const pool= require("../config/database");
 const bcrypt=require("bcrypt");
 const nodemailer = require('nodemailer');
 const transporter = require("../helper.js");
-const short = require('short-uuid');
+
 var ID = function () {
     
     return 'Emp' + Math.random().toString(36).substr(2, 9);
   };
+
+  function getRandomString(length) {
+    var randomChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var result = '';
+    for ( var i = 0; i < length; i++ ) {
+        result += randomChars.charAt(Math.floor(Math.random() * randomChars.length));
+    }
+    return result;
+}
 
 
 module.exports={
@@ -22,7 +31,7 @@ module.exports={
 
  addHRPage:(req,res)=>{// get add new HR form
 
-    pool.query("select * from custom_field; select * from paygrade;select * from job;select * from employment_status;select * from branch;select * from department;select distinct(employment_status)from employment_status" , (error, result)=>{
+    pool.query("select * from custom_field; select * from paygrade;select * from job;select * from employment_status;select * from branch;select * from department;select distinct(employment_status)from employment_status;select * from role;" , (error, result)=>{
        if(error) console.log('Error in mysql', error);
        else {
            if( result.length > 0 ){
@@ -35,7 +44,7 @@ module.exports={
                activeHR:"active",
                activeCustomAttribute:" ",
                title:"Add HR",
-               attributes:result[0],activeStatus:" ",jobs:result[2],payGrades:result[1],employmentStatuses:result[3],branches:result[4],department:result[5],employmentStatusesU:result[6]
+               attributes:result[0],activeStatus:" ",jobs:result[2],payGrades:result[1],employmentStatuses:result[3],branches:result[4],department:result[5],employmentStatusesU:result[6],role:result[7]
                
            });
            }
@@ -45,13 +54,17 @@ module.exports={
 },
 
 addNewHr:(req,res)=>{//  add new HR to employee record and create a user
-    const translator = short();
-    const id=ID();
-   
-    let {first_name,last_name,email,dob,mobile,landline,address,gender,marital_status,residency,emergency_first_name,emergency_last_name,emergency_address,emergency_mobile,emergency_landline,relationship,branch,department,employment_status,employment_status_category,paygrade,accno,custom}=req.body;
-    const randomtext =translator.new();
     
-    console.log(JSON.stringify(custom));
+    const id=ID();
+    console.log(req.body);
+   
+    let {first_name,last_name,email,dob,mobile,landline,address,gender,marital_status,residency,emergency_first_name,emergency_last_name,emergency_address,emergency_mobile,emergency_landline,relationship,branch,department,employment_status,employment_status_category,paygrade,accno,custom,job,role}=req.body;
+    const randomtext =getRandomString(8);
+    
+    //console.log(JSON.stringify(custom));
+    
+   // JSON.stringify(custom);
+    
     
     
     pool.query(`select employment_status_id from employment_status where employment_status=? and category=?`,[employment_status,employment_status_category],async(error,result)=>{
@@ -64,16 +77,30 @@ addNewHr:(req,res)=>{//  add new HR to employee record and create a user
                 console.log(err);
               }
               else {
-                await pool.query("call add_HR(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);",[id,first_name,email,gender,last_name,dob,marital_status,address,residency,mobile,landline,hash,emergency_first_name,emergency_last_name,emergency_mobile,emergency_landline,relationship,emergency_address,parseInt(paygrade),accno,parseInt(result[0].employment_status_id),parseInt(branch),new Date()] ,async(error,result)=>{
+                await pool.query("call add_employee(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);",[id,first_name,email,gender,last_name,dob,marital_status,address,residency,mobile,landline,hash,emergency_first_name,emergency_last_name,emergency_mobile,emergency_landline,relationship,emergency_address,parseInt(paygrade),accno,parseInt(result[0].employment_status_id),parseInt(branch),new Date(),job,department,role] ,async(error,result)=>{
                    
                     if(error)console.log('Error in mysql', error);
                 
                     else{
+                        const keys = Object.keys(custom);
+                        for (let i = 0; i < keys.length; i++) {
+                                const key = keys[i];
+                                console.log(key, custom[key]);
+                                await pool.query(`select field_id from custom_field where field_name=?`,[key],(err,result)=>{
+                                    if(err)console.log(err);
+                                    else{
+                                        console.log(result,key,custom[key]);
+                                        pool.query("insert into custom_information(employee_id,field_id,value)values(?,?,?)",[id,result[0].field_id,custom[key]])
+                                    }
+                                })
+                        }
+                        
+                        
                         const mailOptions = {
                             from: 'littlelady2606@gmail.com',
                             to: email,
                             subject: 'Username and Password',
-                            text: `Your username is ${id}.\nYour password is ${randomtext}`
+                            text: `Hello ${first_name,last_name}!!\nYour username is ${id}.\nYour password is ${randomtext}`
                           };
                         transporter.sendMail(mailOptions, (error, info) => {
                             if (error) {
@@ -84,10 +111,7 @@ addNewHr:(req,res)=>{//  add new HR to employee record and create a user
                       
                             ;
                         });
-                        for(var key in custom){
-                            console.log(key,custom[key],id);
-                            await pool.query("add_custom(?,?,?)",[key,id,custom[key]],(err,result)=>{});
-                        }
+                        
                        
                         res.redirect("/admin/addHR");}
                 
@@ -125,7 +149,7 @@ viewHRPage:(req,res)=>{// view all HR Managers
     },
 
 editHRPage:(req,res)=>{
-    pool.query("select * from HRFull where employee_id=?;select * from custom_field; select * from paygrade;select * from job;select * from employment_status;select * from branch;select * from department;select distinct(employment_status)from employment_status",[req.params.id],(error,result)=>{
+    pool.query("select * from HRFull where employee_id=?;select * from custom_field; select * from paygrade;select * from job;select * from employment_status;select * from branch;select * from department;select distinct(employment_status)from employment_status;select * from role",[req.params.id],(error,result)=>{
         if(error)console.log(err);
         else{
             console.log(result[0]);
@@ -138,7 +162,7 @@ editHRPage:(req,res)=>{
                 activeCustomAttribute:" ",
                 activeHR:true,
                 activeStatus:"",
-                HR:result[0][0], attributes:result[1],jobs:result[3],payGrades:result[2],employmentStatuses:result[4],branches:result[5],department:result[6],employmentStatusesU:result[7]
+                HR:result[0][0], attributes:result[1],jobs:result[3],payGrades:result[2],employmentStatuses:result[4],branches:result[5],department:result[6],employmentStatusesU:result[7],role:result[8]
             })
         }
     })
@@ -150,7 +174,7 @@ editHR:(req,res)=>{
     pool.query(`select employment_status_id from employment_status where employment_status=? and category=?;`,[employment_status,employment_status_category],async(error,result)=>{
         if(error) console.log(error);
         else{
-                await pool.query("call edit_HR(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);",[id,first_name,email,gender,last_name,dob,marital_status,address,residency,mobile,landline,emergency_first_name,emergency_last_name,emergency_mobile,emergency_landline,relationship,emergency_address,parseInt(paygrade),accno,parseInt(result[0].employment_status_id),parseInt(branch),new Date()] ,(error,result)=>{
+                await pool.query("call edit_employee(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);",[id,first_name,email,gender,last_name,dob,marital_status,address,residency,mobile,landline,emergency_first_name,emergency_last_name,emergency_mobile,emergency_landline,relationship,emergency_address,parseInt(paygrade),accno,parseInt(result[0].employment_status_id),parseInt(branch),new Date(),job,department,role] ,(error,result)=>{
                    
                     if(error)console.log('Error in mysql', error);
                 
@@ -173,7 +197,7 @@ editHR:(req,res)=>{
 
 },
 deleteHR:(req,res)=>{
-    pool.query(`call delete_HR(?)`,[req.params.id],(err,result)=>{
+    pool.query(`call delete_employee(?)`,[req.params.id],(err,result)=>{
         if(err)console.log(err);
         else{
             res.redirect(admin/viewHR);
@@ -199,7 +223,7 @@ addNewCustomAttribute:(req,res)=>{//add new CustomAttribute
     
     
     console.log(req.body);
-    pool.query('insert into `custom_field`  SET ?', {field_name: req.body.attributeName,field_type:req.body.attribute_type,default_value:req.body.default_value,max_length:req.body.max_length,min_length:req.body.min_length }, (error, result) => {
+    pool.query('insert into `custom_field`  SET ?', {field_name: req.body.attributeName,default_value:req.body.default_value }, (error, result) => {
         if(error) console.log('Error in mysql', error);
         else {
             
@@ -213,7 +237,7 @@ addNewCustomAttribute:(req,res)=>{//add new CustomAttribute
 addIndependentPage:(req,res)=>{//get add new independent feature form
     const id=req.params.id;
     
-    pool.query(`select * from employee_job_information natural join employee where paygrade_id>?`, [3], (error, result) => {
+    pool.query(`select * from employee_job_information natural join employee where paygrade_id>? and role_id=?`, [3,2], (error, result) => {
         if(error) console.log('Error in mysql', error);
         else {
             console.log(result[0]);
@@ -332,7 +356,7 @@ editCustomAttribute:(req,res)=>{//edit an existing custom attribute
     
    
     
-    pool.query(`select field_name from custom_field where field_id=?;UPDATE ?? SET ?? = ?,?? = ?,??= ?,??= ?,??= ? where  field_id= ?`, [req.params.id,"custom_field", "field_name", req.body.attribute_name, "default_value",req.body.default_value,"field_type",req.body.field_type,"min_length",parseInt(req.body.min_length),"max_length",parseInt(req.body.max_length),req.params.id],async (error,result)=>{
+    pool.query(`select field_name from custom_field where field_id=?;UPDATE ?? SET ?? = ?,?? = ?,??= ? where  field_id= ?`, [req.params.id,"custom_field", "field_name", req.body.attribute_name, "default_value",req.body.default_value,req.params.id],async (error,result)=>{
       if(error) console.log('Error in mysql', error);
       else {
        

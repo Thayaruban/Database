@@ -7,7 +7,9 @@
     <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
     <ul class="navbar-nav px-3">
       <li class="nav-item text-nowrap">
-      <a class="nav-link" href="/logout"><i class="fa fa-power-off fa-fw" aria-hidden="true"></i>&nbsp Sign out</a>
+        <form action="/logout" method="POST">
+          <button class="nav-link"><i class="fa fa-power-off fa-fw" aria-hidden="true"></i>&nbsp Sign out</button>
+      </form>
       </li>
     </ul>
 </nav>
