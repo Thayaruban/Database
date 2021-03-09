@@ -7,7 +7,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <meta name="generator" content="">
-  <title>Dashboard . Jupyter</title>
+  <title>Apply Leave</title>
 
   
 
@@ -186,6 +186,7 @@
         margin:0px 0px 0px 8px;
         color:white;
     }
+	
   </style>
 </head>
 
@@ -196,7 +197,7 @@
             <%- include ('partials/sidebar.ejs'); -%> 
             <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                  <h1 class="h2"><i class="fa fa-user-circle fa-fw" aria-hidden="true"></i> Profile</h1>
+                  <h1 class="h2"><i class="fa fa-plus fa-fw" aria-hidden="true"></i> Apply Leave</h1>
                   <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group mr-2">
                       <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
@@ -213,32 +214,90 @@
                   <nav class="breadcrumb" aria-label="breadcrumb">
                     <ol class="breadcrumb ">
                     <a class="nav-link" href="#"><li class="breadcrumb-item bread"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp Home &nbsp >></li></a>
-                    <li class="breadcrumb-item bread"><i class="fa fa-user fa-fw" aria-hidden="true"></i>&nbsp Profile</li>
+                    <li class="breadcrumb-item bread"><i class="fa fa-user fa-fw" aria-hidden="true"></i>&nbsp Leave</li>
                     </ol>
                   </nav>
                 </div>
         
                 <div class="container col-lg-3"></div>
-        <div class="container col-lg-4">
+        <div class="container col-lg-12">
 
           <div class="container col-6">
-            <div class="card" style="width:36rem;">
-                <img src="../assets/img/team/2.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <h6 class="card-subtitle mb-2 text-muted ">Card subtitle</h6>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <ul class="list-gruop list-group-flush">
-                    name<li class="list-group-item">,sdanv,</li>
-                        <li class="list-group-item">,sdanv,</li>
-                        <li class="list-group-item">,sdanv,</li>
-                        <li class="list-group-item">,sdanv,</li>
-                        <li class="list-group-item">,sdanv,</li>
-                    </ul>
-                    <a class="card-link "href="">edit</a>
-                    <a class="card-link "href="">change</a>
-                </div>
-            </div>
+            <div class="card" >
+					<div class="card-header " >
+						<h5> Apply Leave </h5>
+					</div>
+                    <div class="card-body " >
+                      
+                          <form  action="/hr/applyLeave/<%=eid%>" method="POST" class="row g-3 needs-validation " >
+                            <div class="row justify-content-center" style="margin-top:20px;">
+                              <div class="col-md-3  ">
+                                <label for="leave_title" class="form-label">Leave Title</label>
+							  </div>
+							  <div class="col-md-9  ">
+                                <select name="leave_title" id="leave_title" class="form-control" required>
+									<option value="1">Annual</option>
+									<option value="2">Casual</option>
+									<option value="3">Maternity</option>
+									<option value="4">No-pay</option>
+								</select>
+                                <div class="valid-feedback">
+                                  Looks good!
+                                </div>
+                              </div>
+                              
+                              
+                            </div>
+							
+							<div class="row justify-content-center " style="margin-top:20px;">
+                              <div class="col-md-3  ">
+                                <label for="start_date" class="form-label">Start Date</label>
+							  </div>
+							  <div class="col-md-9  ">
+                                <input type="date" class="form-control" id="start_date" name="start_date"  required>
+                                <div class="valid-feedback">
+                                  Looks good!
+                                </div>
+                              </div>
+                            </div>
+                           
+                            <div class="row justify-content-center" style="margin-top:20px;">
+                              <div class="col-md-3  ">
+                                <label for="end_date" class="form-label">End Date</label>
+							  </div>
+							  <div class="col-md-9  ">
+                                <input type="date" class="form-control" id="end_date" name="end_date"  required>
+                                <div class="valid-feedback">
+                                  Looks good!
+                                </div>
+                              </div>
+
+                              
+                            </div>
+							
+							<div class="row justify-content-center" style="margin-top:20px;">
+                              <div class="col-md-3  ">
+                                <label for="day_count" class="form-label">Day Count</label>
+							  </div>
+							  <div class="col-md-9  ">
+                                <input type="number" class="form-control" id="day_count" name="day_count" min="0" placeholder=0 required>
+                                <div class="valid-feedback">
+                                  Looks good!
+                                </div>
+                              </div>
+                              
+                              
+                            </div>
+                            
+                           <div class="col-5"></div>
+                            <div class="col-4">
+                              <button class="btn btn-primary" type="submit">Submit form</button>
+                            </div>
+                          </form>
+                      
+                    </div>
+                   
+                  </div>
         </div>
 
     </div>

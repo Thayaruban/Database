@@ -8,7 +8,14 @@ const { request } = require("express");
 
 
 
-
+router.use(function(req, res, next) {
+    res.locals.full_name = req.session.full_name;
+    res.locals.job_title=req.session.job_title;
+    res.locals.paygrade=req.session.paygrade;
+    res.locals.role=req.session.role;
+    res.locals.eid=req.session.eid;
+    next();
+  });
 //GET 
 router.get("/",indexpage);
 
@@ -23,33 +30,32 @@ router.post("/login",async(req,res)=>{
         if(isPasswordCorrect){
             req.session.role="admin";
            
-            console.log(req.session);
+           
             
             res.redirect("/admin/dashboard")
         }else{
-            console.log(req.session);
+           
             res.redirect("/");
         }
     
        });
    }else{
 
-    await pool.query(`SELECT * from HRFull where employee_id=?`,[username],async(err,result)=>{
-        console.log(result);
+    await pool.query(`SELECT * from EmployeeFull where employee_id=?`,[username],async(err,result)=>{
+       
         const isPasswordCorrect = await bcrypt.compare(password, result[0].password);
-        console.log(isPasswordCorrect,result[0].password);
+        
         if(isPasswordCorrect){
+           
             req.session.role=result[0].role_title;
             req.session.paygrade=result[0].paygrade_id;
-            console.log(req.session.role);
-            if(req.session.role=="hr manager"){
-               
-                res.redirect("/hr/hrDashboard");
-            }else if(req.session.role=="supervisor"){
-
-            }else if(req.session.role=="employee"){
-
-            }
+            req.session.job_title=result[0].job_title;
+            req.session.full_name=result[0].first_name;
+            req.session.eid=result[0].employee_id;
+           req.session.department=result[0].department_id;
+            console.log(req.session);
+            res.redirect("/hr/hrDashboard");
+            
             
             
         }else{

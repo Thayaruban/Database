@@ -186,17 +186,31 @@
         margin:0px 0px 0px 8px;
         color:white;
     }
+    .form-gruop-report{
+      float: left;
+      margin-right: 2in;
+    }
+    .box-report{
+      box-shadow: 5px 5px black;
+      background: #e9ecef;
+      width: auto;
+      height: auto;
+      padding:1rem 1rem 1rem 2.5rem;
+      border-radius: 2rem;
+      margin-bottom: 5rem;
+      
+    }
   </style>
 </head>
 
 <body>
-    <%- include ('./partials/topbar.ejs'); -%> 
+    <%- include ('partials/topbar.ejs'); -%> 
     <div class="container-fluid">
         <div class="row">
-            <%- include ('./partials/sidebar.ejs'); -%> 
+            <%- include ('partials/sidebar.ejs'); -%> 
             <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                  <h1 class="h2"><i class="fa fa-home fa-fw" aria-hidden="true"></i> Dashboard</h1>
+                  <h1 class="h2"><i class="fa fa-server fa-fw" aria-hidden="true"></i> Approve Leaves</h1>
                   <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group mr-2">
                       <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
@@ -212,13 +226,64 @@
                 <div class=" justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                   <nav class="breadcrumb" aria-label="breadcrumb">
                     <ol class="breadcrumb ">
-                    <li class="breadcrumb-item bread"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp Home</li>
+                        <a class="nav-link" href="/hr/hrDashboard"><li class="breadcrumb-item bread"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp Home &nbsp >></li></a>
+                    <li class="breadcrumb-item bread"><i class="fa fa-server fa-fw" aria-hidden="true"></i>&nbsp Approve Leaves </li>
                     </ol>
                   </nav>
                 </div>
-        
                 
-        
+                
+                <div class="col-lg-12 table-responsive">
+                    <table class="table caption-top table-hover ">
+                        <caption>List of employee's</caption]>
+                        <br>
+                        <caption><span>Search</span>&nbsp <input type="search" class="search_table" name="search_table" placeholder="Search"></caption]>
+                        <thead class="table-primary">
+            
+                          <td>Employee First Name</td>
+                          <td>Employee Last  Name</td>
+                          <td>Leave Type</td>
+                          <td>Leave Start Date</td>
+                          <td>Leave End Date</td>
+                          
+                          <td>No.of Days/Balance Leave Count</td>
+                          <td>Approve</td>
+                          <td>Decline</td>
+                         
+            
+                        <thead>
+            
+                        <tbody>
+                          <%  for (let leave of employee_leave_count){ %>
+    
+  
+                          <tr>
+                            <td><%= leave.first_name %></td>
+                            <td><%= leave.last_name %></td>
+                            <td><%= leave.leave_title %></td>
+                            <td><%= leave.start_date %></td>
+                            <td><%= leave.end_date %></td>
+                            <td><%=leave.num_of_leaves%>/<%= leave.available_leaves %></td>
+                            <td><a href="/hr/hrApproveLeave/approve/<%=leave.id %>"><button class="btn-primary">Approve</button></a></td>
+                            <td><a href="/hr/hrApproveLeave/denied/<%=leave.id %>"><button class="btn-danger">Denied</button></a></td>
+                           
+                          </tr>
+  
+                            <% } %> 
+  
+                        </tbody>
+            
+                        
+                    </table>
+                    </div>
+                 
+                    
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+               
+                
                 
               </main>
 
@@ -233,6 +298,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"
   integrity="sha384-i+dHPTzZw7YVZOx9lbH5l6lP74sLRtMtwN2XjVqjf3uAGAREAF4LMIUDTWEVs4LI"
   crossorigin="anonymous"></script>
+  <script>
+      function data(a,b,c){
+          document.getElementById('exampleModalLabel').innerHTML=a;
+          document.getElementById('a').innerHTML=b;
+          document.getElementById('b').innerHTML=c;
+      }
+  </script>
 </body>
 
 </html>

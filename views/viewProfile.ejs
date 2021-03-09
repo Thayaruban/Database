@@ -1,0 +1,201 @@
+
+
+    <%- include ('./partials/header.ejs'); -%> 
+    <%- include ('./partials/topbar.ejs'); -%> 
+    <div class="container-fluid">
+        <div class="row">
+            <%- include ('./partials/sidebar.ejs'); -%> 
+            <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                  <h1 class="h2"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i> View Profile</h1>
+                  
+                </div>
+        
+                <div class=" justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                  <nav class="breadcrumb" aria-label="breadcrumb">
+                    <ol class="breadcrumb ">
+                    <a class="nav-link" href="#"><li class="breadcrumb-item bread"><i class="fa fa-home fa-fw" aria-hidden="true"></i>&nbsp Home &nbsp >></li></a>
+                   
+                    <li class="breadcrumb-item bread"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i>&nbsp View Profile</li>
+                    </ol>
+                  </nav>
+                </div>
+
+
+                <div class="card" style="width:100%;">
+                    <div class="card-body">
+                      <h5 class="card-title">Personal Information</h5>
+                          <form action="/hr/editEmployee/<%=HR.employee_id%>" class="row g-3 needs-validation" method="post" >
+                            <div class="col-md-4">
+                              <label for="firstname" class="form-label">First name</label>
+                              <input type="text" class="form-control" id="first_name" name="first_name" value="<%=HR.first_name%>" readonly>
+                              
+                            </div>
+                            <div class="col-md-4">
+                              <label for="last_name" class="form-label">Last name</label>
+                              <input type="text" class="form-control" id="last_name" name="last_name" value="<%=HR.last_name%>" readonly>
+                            
+                            </div>
+                            
+                            <div class="col-md-4">
+                              <label for="dob">Date of Birth</label>
+                              <input type="date" class="form-control" id="dob" name="dob" aria-describedby="inputGroupPrepend" readonly name="birthday" value="<%=HR.dob%>">
+                              
+                            </div>
+                            <div class="col-md-8">
+                              <label for="address" class="form-label">Address</label>
+                              <input type="text" class="form-control" id="address" name="address" aria-describedby="inputGroupPrepend" readonly name="address" value="<%=HR.address%>">
+                             
+                            </div>
+
+                            <div class="col-md-4">
+                              <label for="address" class="form-label">Email</label>
+                              <input type="text" class="form-control" id="email" name="email" aria-describedby="inputGroupPrepend" readonly value="<%=HR.email%>" >
+                             
+                            </div>
+                            <div class="col-md-4">
+                              <label for="gender" class="form-label">Gender</label>
+                              <input type="text" class="form-control" id="gender" name="gender" aria-describedby="inputGroupPrepend" readonly value="<%=HR.gender%>" >
+                              
+                            </div>
+                            <div class="col-md-4">
+                              <label for="marital_status" class="form-label">Status</label>
+                              <input type="text" class="form-control" id="marital_status" name="marital_status" aria-describedby="inputGroupPrepend" readonly value="<%=HR.marital_status%>" >
+                            </div>
+                            <div class="col-md-4">
+                              <label for="residency" class="form-label">Residency</label>
+                              <input type="text" class="form-control" id="residency" name="residency" aria-describedby="inputGroupPrepend" readonly value="<%=HR.residency%>">
+                             
+                            </div>
+                            <div class="col-md-4">
+                              <label for="mobile" class="form-label">Mobile</label>
+                              <input type="text" class="form-control" id="mobile"  name="mobile" readonly value="<%=HR.cell_phone%>"> 
+                              
+                            </div>
+                            <div class="col-md-4">
+                              <label for="landline" class="form-label">LandLine</label>
+                              <input type="text" class="form-control" id="landline" name="landline" value="<%=HR.home_phone%>" readonly>
+                             
+                            </div>
+                            
+
+                            
+                            
+                            
+                            
+          
+                            <h5 class="card-title">Emergency Contact Details(Whom to contact in emergency)</h5>
+          
+                            <div class="col-md-4">
+                              <label for="emergency_firstname" class="form-label">First name</label>
+                              <input type="text" class="form-control" id="emergency_first_name" name="emergency_first_name" placeholder="Emergency Firstname" value="<%=HR.emergency_first_name%>" readonly>
+                             
+                            </div>
+                            <div class="col-md-4">
+                              <label for="emergency_last_name" class="form-label">Last name</label>
+                              <input type="text" class="form-control" id="emergency_last_name" name="emergency_last_name" placeholder="Emergency Lastname" value="<%=HR.emergency_last_name%>" readonly>
+                              
+                            </div>
+                            <div class="col-md-8">
+                              <label for="emergency_address" class="form-label">Address</label>
+                              <input type="text" class="form-control" id="emergency_address" name="emergency_address" aria-describedby="inputGroupPrepend" readonly value="<%=HR.emergency_address%>" name="address">
+                             
+                            </div>
+                            <div class="col-md-4">
+                              <label for="emergency_mobile" class="form-label">Mobile</label>
+                              <input type="text" class="form-control" id="emergency_mobile"  name="emergency_mobile" value="<%=HR.emergency_cell_phone%>" readonly>
+                             
+                            </div>
+                          
+                            <div class="col-md-4">
+                              <label for="emergency_landline" class="form-label">LandLine</label>
+                              <input type="text" class="form-control" id="emergency_landline" name="emergency_landline"value="<%=HR.emergency_home_phone%>" readonly>
+                             
+                            </div>
+                            <div class="col-md-4">
+                              <label for="relationship" class="form-label">Relationship</label>
+                              <input type="text" class="form-control" id="relationship" name="relationship" value="<%=HR.relationship%>" readonly>
+                             
+                            </div>
+                            
+
+                            <h5 class="card-title">Job Details</h5>
+          
+                            <div class="col-md-4">
+                              <label for="branch" class="form-label">Branch</label>
+                              <input type="text" class="form-control" id="branch" name="branch" value="<%=HR.branch_title%>" readonly>
+                             
+                            </div>
+
+                            <div class="col-md-4">
+                                <label for="job" class="form-label">Job</label>
+                                <input type="text" class="form-control" id="job" name="job" value="<%=HR.job_title%>" readonly>
+                               
+                              </div>
+                              <div class="col-md-4">
+                                <label for="department" class="form-label">Department</label>
+                                <input type="text" class="form-control" id="department" name="department" value="<%=HR.department_title%>" readonly>
+                                
+                               
+                              </div>
+  
+                              <div class="col-md-4">
+                                <label for="role" class="form-label">Role</label>
+                                <input type="text" class="form-control" id="role" name="role" value="<%=HR.role_title%>" readonly>
+                               
+                              </div>
+  
+
+                           
+
+                            <div class="col-md-4">
+                              <label for="employment_status" class="form-label">EmploymentStatus</label>
+                              <input type="text" class="form-control" id="employment_status" name="employment_status" value="<%=HR.employment_status%>" readonly>
+                             
+                            </div>
+                            <div class="col-md-4">
+                              <label for="employment_status_category" class="form-label">EmploymentStatus Category</label>
+                              <input type="text" class="form-control" id="category" name="category" value="<%=HR.category%>" readonly>
+                             
+                            </div>
+
+                            <div class="col-md-4">
+                              <label for="paygrade" class="form-label">PayGrade</label>
+                              <input type="text" class="form-control" id="paygrade" name="paygrade" value="<%=HR.paygrade_title%>" readonly>
+                             
+                            </div>
+                            <div class="col-md-4">
+                              <label for="accno" class="form-label">Account No</label>
+                              <input type="text" class="form-control" id="accno" name="accno" placeholder="Account No"value="<%=HR.bank_account_number%>" readonly>
+                             
+                            </div>
+                            
+                            
+                            
+                            
+                            
+
+                            
+                            
+                            
+                            
+                           
+                          
+                          
+                      
+                    </div>
+                  </div>
+        
+                
+        
+                
+              </main>
+
+        </div>
+    </div>
+    <%- include ('./partials/footer.ejs'); -%> 
+
+    
+
+
+

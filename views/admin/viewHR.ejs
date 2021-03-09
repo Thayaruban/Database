@@ -29,7 +29,8 @@
                       <caption><span>Search</span>&nbsp <input type="search" onclick="search()" class="search_table" name="search_table" placeholder="Search"></caption]>
                       <thead class="table-primary">
           
-                        <td>Full Name</td>
+                        <td>First Name</td>
+                        <td>Last Name</td>
                         <td>Email</td>
                         
                         <td>Branch</td>
@@ -45,7 +46,8 @@
                       <tbody>
                         <% for (let v of views){%>
                           <tr>
-                            <td><%=v.full_name%></td>
+                            <td><%=v.first_name%></td>
+                            <td><%=v.last_name%></td>
                             <td><%=v.email%></td>
                             <td><%=v.branch_title%></td>
                             <td><%=v.employment_status%></td>

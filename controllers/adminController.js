@@ -61,10 +61,7 @@ addNewHr:(req,res)=>{//  add new HR to employee record and create a user
     let {first_name,last_name,email,dob,mobile,landline,address,gender,marital_status,residency,emergency_first_name,emergency_last_name,emergency_address,emergency_mobile,emergency_landline,relationship,branch,department,employment_status,employment_status_category,paygrade,accno,custom,job,role}=req.body;
     const randomtext =getRandomString(8);
     
-    //console.log(JSON.stringify(custom));
-    
-   // JSON.stringify(custom);
-    
+   
     
     
     pool.query(`select employment_status_id from employment_status where employment_status=? and category=?`,[employment_status,employment_status_category],async(error,result)=>{
@@ -77,6 +74,7 @@ addNewHr:(req,res)=>{//  add new HR to employee record and create a user
                 console.log(err);
               }
               else {
+                
                 await pool.query("call add_employee(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);",[id,first_name,email,gender,last_name,dob,marital_status,address,residency,mobile,landline,hash,emergency_first_name,emergency_last_name,emergency_mobile,emergency_landline,relationship,emergency_address,parseInt(paygrade),accno,parseInt(result[0].employment_status_id),parseInt(branch),new Date(),job,department,role] ,async(error,result)=>{
                    
                     if(error)console.log('Error in mysql', error);
@@ -130,8 +128,8 @@ addNewHr:(req,res)=>{//  add new HR to employee record and create a user
 },
 
 viewHRPage:(req,res)=>{// view all HR Managers
-      pool.query("select * from HR order by full_name",(error,result)=>{
-          if(error)console.log(err);
+      pool.query("select * from EmployeeFull where role_id=1 ",(error,result)=>{
+          if(error)console.log(error);
           else{
             
               res.render("admin/viewHR",{
@@ -149,7 +147,7 @@ viewHRPage:(req,res)=>{// view all HR Managers
     },
 
 editHRPage:(req,res)=>{
-    pool.query("select * from HRFull where employee_id=?;select * from custom_field; select * from paygrade;select * from job;select * from employment_status;select * from branch;select * from department;select distinct(employment_status)from employment_status;select * from role",[req.params.id],(error,result)=>{
+    pool.query("select * from EmployeeFull where employee_id=?;select * from custom_field; select * from paygrade;select * from job;select * from employment_status;select * from branch;select * from department;select distinct(employment_status)from employment_status;select * from role",[req.params.id],(error,result)=>{
         if(error)console.log(err);
         else{
             console.log(result[0]);
@@ -237,7 +235,7 @@ addNewCustomAttribute:(req,res)=>{//add new CustomAttribute
 addIndependentPage:(req,res)=>{//get add new independent feature form
     const id=req.params.id;
     
-    pool.query(`select * from employee_job_information natural join employee where paygrade_id>? and role_id=?`, [3,2], (error, result) => {
+    pool.query(`select * from employee_job natural join employee where paygrade_id>? and role_id=?`, [3,2], (error, result) => {
         if(error) console.log('Error in mysql', error);
         else {
             console.log(result[0]);
@@ -287,7 +285,7 @@ addNewIndependent:(req,res)=>{ //add new independent feature.Independent feature
     })
 }else if(id=="department"){
     console.log(req.body);
-    pool.query(`insert into ${tableName}  SET  ?`, {"department_title":req.body.title,"building":req.body.building,"department_description":req.body.description,"supervisor_id":req.body.supervisor_id}, (error, result) => {
+    pool.query(`insert into ${tableName}  SET  ?`, {"department_title":req.body.title,"building":req.body.building,"department_description":req.body.description,"supervisor_id":req.body.supervisor}, (error, result) => {
         if(error) console.log('Error in mysql', error);
         else {
             res.redirect(`/admin/${tableName}`);
@@ -425,7 +423,7 @@ viewIndependentPage:async(req,res)=>{//get independent features list.
         
         
  
-         await pool.query(`select * from department natural join employee_job_information natural join employee where employee_id=supervisor_id `, (error, result)=>{
+         await pool.query(`select * from department natural join employee where(employee.employee_id=department.supervisor_id) `, (error, result)=>{
              if(error) console.log('Error in mysql', error);
              else {
                  if( result){

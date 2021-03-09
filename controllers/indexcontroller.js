@@ -7,8 +7,7 @@ module.exports = {
         });
     },
     hrDashboard:(req,res)=>{
-        req.session.user=" ";
-        req.session.user.type="Hr";
+       ;
         res.render("hrDashboard",{
             active1:"active"
            ,activeProfile:" " 
