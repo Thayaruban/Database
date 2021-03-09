@@ -53,7 +53,7 @@ router.post("/login",async(req,res)=>{
             req.session.full_name=result[0].first_name;
             req.session.eid=result[0].employee_id;
            req.session.department=result[0].department_id;
-            console.log(req.session);
+           
             res.redirect("/hr/hrDashboard");
             
             
